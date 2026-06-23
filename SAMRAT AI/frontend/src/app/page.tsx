@@ -984,7 +984,8 @@ export default function Home() {
 
       {/* ----------------- SCREEN 3: UNIFIED CHAT WORKSPACE ----------------- */}
       {activeScreen === 'chat' && (
-        <div className="flex-1 flex flex-col h-screen overflow-hidden relative z-          {/* Top Navbar */}
+        <div className="flex-1 flex flex-col h-screen overflow-hidden relative z-10">
+          {/* Top Navbar */}
           <nav className={`py-3 px-6 border-b backdrop-blur-xl flex items-center justify-between transition-colors z-20 ${
             isHacker
               ? 'bg-black border-emerald-500/20'
@@ -1015,7 +1016,7 @@ export default function Home() {
                   {profileSettings.username || user?.email || 'Echo Mind User'}
                 </span>
               </div>
-            </div>          </div>
+            </div>
 
             <div className="flex items-center gap-2">
               {/* Light/Dark Toggle */}
@@ -1119,7 +1120,9 @@ export default function Home() {
                   const hiddenFiltered = filtered.filter(c => hiddenChatIds.includes(c.id));
 
                   const pinned = activeFiltered.filter(c => c.is_pinned);
-                  const recent = activeFiltered.filter(c =>                   const renderChatItem = (chat: ChatRoom, isCurrentlyHidden?: boolean) => {
+                  const recent = activeFiltered.filter(c => !c.is_pinned);
+
+                  const renderChatItem = (chat: ChatRoom, isCurrentlyHidden?: boolean) => {
                     const isActive = chat.id === activeChatId;
                     const isEditing = chat.id === chatEditId;
 
@@ -1234,7 +1237,7 @@ export default function Home() {
                   </span>
                   <div className={`w-2.5 h-2.5 rounded-full animate-pulse ${isHacker ? 'bg-emerald-500 shadow-[0_0_6px_#10b981]' : 'bg-emerald-500'}`} />
                 </div>
-              </div>          </div>
+              </div>
             </aside>
 
             {/* Main Chat Area */}
@@ -1244,7 +1247,8 @@ export default function Home() {
               <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 scrollbar-thin scrollbar-thumb-slate-800 pb-44">
                 {!activeChatId ? (
                   /* Welcome Screen / Dashboard fallback inside Unified Workspace */
-                  <div className="min-h-full flex flex-col items-center justify-start pt-8 pb-44 px-4 max-w-3xl m                    {/* Character mascot */}
+                  <div className="min-h-full flex flex-col items-center justify-start pt-8 pb-44 px-4 max-w-3xl mx-auto">
+                    {/* Character mascot */}
                     <div className="relative flex flex-col items-center justify-center mb-6 w-full">
                       {/* Character image wrapper without background circle */}
                       <div className="relative w-56 h-56 flex items-center justify-center">
@@ -1422,7 +1426,9 @@ export default function Home() {
                     <div className="h-44 flex-shrink-0" />
                   </div>
                 )}
-                    {/* Bottom Floating Chat Dock Container */}
+              </div>
+
+              {/* Bottom Floating Chat Dock Container */}
               <div className={`absolute bottom-0 inset-x-0 p-4 transition-all z-10 ${
                 isHacker
                   ? 'bg-gradient-to-t from-black via-black/90 to-transparent'
@@ -1568,7 +1574,7 @@ export default function Home() {
                     >
                       <Send className="w-4 h-4" />
                     </button>
-                  </form>         </form>
+                  </form>
                 </div>
               </div>
             </main>
