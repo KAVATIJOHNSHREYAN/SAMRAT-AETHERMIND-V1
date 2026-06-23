@@ -1726,7 +1726,7 @@ export default function Home() {
                         <div className={`w-18 h-18 rounded-full border-2 overflow-hidden flex items-center justify-center ${isDark ? 'bg-slate-850 border-slate-700' : 'bg-slate-200 border-slate-300'}`}>
                           {profileSettings.profilePictureUrl ? (
                             <img 
-                              src={profileSettings.profilePictureUrl.startsWith('http') ? profileSettings.profilePictureUrl : `http://localhost:8000${profileSettings.profilePictureUrl}`} 
+                              src={profileSettings.profilePictureUrl.startsWith('http') ? profileSettings.profilePictureUrl : (typeof window !== 'undefined' && !window.location.origin.includes('localhost') ? `${window.location.origin}/_/backend${profileSettings.profilePictureUrl}` : `http://localhost:8000${profileSettings.profilePictureUrl}`)}
                               alt="Profile" 
                               className="w-full h-full object-cover" 
                             />
