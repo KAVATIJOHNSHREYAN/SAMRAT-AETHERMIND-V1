@@ -7,8 +7,8 @@ const getBaseUrl = (): string => {
     if (origin.includes('localhost') || origin.includes('127.0.0.1')) {
       return 'http://localhost:8000/api/v1';
     }
-    // In production, the backend is hosted under the routePrefix /_/backend
-    return `${origin}/_/backend/api/v1`;
+    // In production, the backend is routed through /api
+    return `${origin}/api/v1`;
   }
   return 'http://localhost:8000/api/v1';
 };
